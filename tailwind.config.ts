@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Kid-friendly colors
+				kid: {
+					blue: '#4A7CFF',
+					red: '#FF6B6B',
+					yellow: '#FFD166',
+					green: '#06D6A0',
+					purple: '#9381FF',
+					orange: '#FF9F1C',
+					teal: '#0ACDCA',
+					pink: '#FF70A6',
+					lightBlue: '#73D2DE',
+					lime: '#B8F335',
 				}
 			},
 			borderRadius: {
@@ -84,11 +98,27 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'bounce-light': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
+				'scale-up': {
+					'0%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.2)' },
+					'100%': { transform: 'scale(1)' },
+				},
+				'rotate-icon': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'bounce-light': 'bounce-light 2s infinite ease-in-out',
+				'scale-up': 'scale-up 0.5s ease-in-out',
+				'rotate-icon': 'rotate-icon 1s ease-in-out',
 			}
 		}
 	},
