@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Alphabet from "./pages/Alphabet";
 import Numbers from "./pages/Numbers";
+import Arabic from "./pages/Arabic";
 import Header from "./components/Header";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/alphabet" element={<Alphabet />} />
               <Route path="/numbers" element={<Numbers />} />
+              <Route path="/arabic" element={<Arabic />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Book, BarChart } from 'lucide-react';
+import { Book, BarChart, Languages } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ const Index = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl"
       >
         <motion.div variants={itemVariants}>
           <div 
@@ -115,6 +114,42 @@ const Index = () => {
               <Button 
                 className="w-full bg-kid-orange hover:bg-kid-orange/90"
                 onClick={() => navigate('/numbers')}
+              >
+                Mulai Belajar
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <div 
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+            onClick={() => navigate('/arabic')}
+          >
+            <div className="bg-gradient-to-r from-kid-purple to-kid-blue h-16 flex items-center justify-center">
+              <Languages className="text-white" size={32} />
+            </div>
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Belajar Huruf Arab</h2>
+              <p className="text-gray-600 mb-4">
+                Mengenal huruf hijaiyah dan berlatih mengucapkannya dengan benar
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {['ا', 'ب', 'ت', 'ث', 'ج'].map(letter => (
+                  <span 
+                    key={letter} 
+                    className="w-10 h-10 rounded-full bg-kid-purple/10 text-kid-purple flex items-center justify-center font-bold text-xl"
+                  >
+                    {letter}
+                  </span>
+                ))}
+                <span className="w-10 h-10 rounded-full bg-kid-blue/10 text-kid-blue flex items-center justify-center font-bold">
+                  ...
+                </span>
+              </div>
+              <Button 
+                className="w-full bg-kid-purple hover:bg-kid-purple/90"
+                onClick={() => navigate('/arabic')}
               >
                 Mulai Belajar
               </Button>

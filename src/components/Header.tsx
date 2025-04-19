@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mic, Home, Book } from 'lucide-react';
+import { Mic, Home, Book, Languages } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -40,6 +40,14 @@ const Header: React.FC = () => {
             onClick={() => navigate('/numbers')}
           >
             123
+          </Button>
+          <Button 
+            variant={location.pathname === '/arabic' ? "secondary" : "ghost"} 
+            className={`rounded-full font-medium ${location.pathname === '/arabic' ? 'bg-white text-kid-blue' : 'text-white hover:bg-white/20'}`}
+            onClick={() => navigate('/arabic')}
+          >
+            <Languages className="mr-1" size={18} />
+            Arab
           </Button>
         </nav>
       </div>

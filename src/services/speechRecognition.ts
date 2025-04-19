@@ -1,9 +1,10 @@
 // Speech recognition service with improved type definitions for browser compatibility
 
-// Define types for the Web Speech API
-interface Window {
-  SpeechRecognition?: new () => SpeechRecognition;
-  webkitSpeechRecognition?: new () => SpeechRecognition;
+declare global {
+  interface Window {
+    SpeechRecognition?: new () => SpeechRecognition;
+    webkitSpeechRecognition?: new () => SpeechRecognition;
+  }
 }
 
 interface SpeechRecognition extends EventTarget {
