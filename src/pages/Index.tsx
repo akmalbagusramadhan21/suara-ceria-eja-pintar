@@ -3,9 +3,17 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Book, BarChart, Languages } from 'lucide-react';
+import Background from '@/components/Background';
+import Mascot from '@/components/Mascot';
 
 const Index = () => {
   const navigate = useNavigate();
+
+  const playButtonSound = () => {
+    const audio = new Audio('/click.mp3');
+    audio.volume = 0.3;
+    audio.play().catch(e => console.error('Could not play audio', e));
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,6 +36,9 @@ const Index = () => {
 
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center px-4">
+      <Background />
+      <Mascot />
+
       <motion.div
         className="text-center mb-12"
         initial={{ y: -50, opacity: 0 }}
