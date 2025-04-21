@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -45,10 +46,10 @@ const Index = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-kid-blue to-kid-purple bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-kid-blue to-kid-purple dark:from-dark-primary dark:to-dark-secondary bg-clip-text text-transparent mb-4">
           Suara Ceria Eja Pintar
         </h1>
-        <p className="text-lg text-gray-600 max-w-xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
           Belajar membaca dan berhitung dengan menyenangkan! 
           Ucapkan huruf dan angka yang kamu lihat untuk melatih kemampuanmu.
         </p>
@@ -62,27 +63,27 @@ const Index = () => {
       >
         <motion.div variants={itemVariants}>
           <div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+            className="bg-white dark:bg-dark-background/80 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
             onClick={() => navigate('/alphabet')}
           >
             <div className="bg-gradient-to-r from-kid-blue to-kid-purple h-16 flex items-center justify-center">
               <Book className="text-white" size={32} />
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Belajar Alfabet</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Belajar Alfabet</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Mengenal huruf A sampai Z dan berlatih mengucapkannya dengan benar
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {['A', 'B', 'C', 'D', 'E', 'F'].map(letter => (
                   <span 
                     key={letter} 
-                    className="w-10 h-10 rounded-full bg-kid-blue/10 text-kid-blue flex items-center justify-center font-bold"
+                    className="w-10 h-10 rounded-full bg-kid-blue/10 dark:bg-kid-blue/20 text-kid-blue dark:text-kid-blue/90 flex items-center justify-center font-bold"
                   >
                     {letter}
                   </span>
                 ))}
-                <span className="w-10 h-10 rounded-full bg-kid-purple/10 text-kid-purple flex items-center justify-center font-bold">
+                <span className="w-10 h-10 rounded-full bg-kid-purple/10 dark:bg-kid-purple/20 text-kid-purple dark:text-kid-purple/90 flex items-center justify-center font-bold">
                   ...
                 </span>
               </div>
@@ -98,27 +99,27 @@ const Index = () => {
 
         <motion.div variants={itemVariants}>
           <div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+            className="bg-white dark:bg-dark-background/80 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
             onClick={() => navigate('/numbers')}
           >
             <div className="bg-gradient-to-r from-kid-orange to-kid-red h-16 flex items-center justify-center">
               <BarChart className="text-white" size={32} />
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Belajar Angka</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Belajar Angka</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Mengenal angka 0 sampai 10 dan berlatih mengucapkannya dengan benar
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {['1', '2', '3', '4', '5'].map(num => (
                   <span 
                     key={num} 
-                    className="w-10 h-10 rounded-full bg-kid-orange/10 text-kid-orange flex items-center justify-center font-bold"
+                    className="w-10 h-10 rounded-full bg-kid-orange/10 dark:bg-kid-orange/20 text-kid-orange dark:text-kid-orange/90 flex items-center justify-center font-bold"
                   >
                     {num}
                   </span>
                 ))}
-                <span className="w-10 h-10 rounded-full bg-kid-red/10 text-kid-red flex items-center justify-center font-bold">
+                <span className="w-10 h-10 rounded-full bg-kid-red/10 dark:bg-kid-red/20 text-kid-red dark:text-kid-red/90 flex items-center justify-center font-bold">
                   ...
                 </span>
               </div>
@@ -134,27 +135,27 @@ const Index = () => {
 
         <motion.div variants={itemVariants}>
           <div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+            className="bg-white dark:bg-dark-background/80 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
             onClick={() => navigate('/arabic')}
           >
             <div className="bg-gradient-to-r from-kid-purple to-kid-blue h-16 flex items-center justify-center">
               <Languages className="text-white" size={32} />
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Belajar Huruf Arab</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Belajar Huruf Arab</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Mengenal huruf hijaiyah dan berlatih mengucapkannya dengan benar
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {['ا', 'ب', 'ت', 'ث', 'ج'].map(letter => (
                   <span 
                     key={letter} 
-                    className="w-10 h-10 rounded-full bg-kid-purple/10 text-kid-purple flex items-center justify-center font-bold text-xl"
+                    className="w-10 h-10 rounded-full bg-kid-purple/10 dark:bg-kid-purple/20 text-kid-purple dark:text-kid-purple/90 flex items-center justify-center font-bold text-xl"
                   >
                     {letter}
                   </span>
                 ))}
-                <span className="w-10 h-10 rounded-full bg-kid-blue/10 text-kid-blue flex items-center justify-center font-bold">
+                <span className="w-10 h-10 rounded-full bg-kid-blue/10 dark:bg-kid-blue/20 text-kid-blue dark:text-kid-blue/90 flex items-center justify-center font-bold">
                   ...
                 </span>
               </div>
@@ -175,7 +176,7 @@ const Index = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
           Tekan tombol mikrofon dan ucapkan huruf atau angka yang kamu lihat!
         </p>
       </motion.div>

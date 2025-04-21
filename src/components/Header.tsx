@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Mic, Home, Book, Languages, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -8,6 +9,12 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  // Make sure we only access theme after component is mounted to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const playButtonSound = () => {
     const audio = new Audio('/click.mp3');
@@ -24,6 +31,9 @@ const Header: React.FC = () => {
     playButtonSound();
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+
+  // Avoid rendering with wrong theme
+  if (!mounted) return null;
 
   return (
     <header className="bg-gradient-to-r from-kid-blue to-kid-purple dark:from-dark-primary dark:to-dark-secondary p-4 rounded-b-lg shadow-md">
