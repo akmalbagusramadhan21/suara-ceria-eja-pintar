@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { Mic, Volume2, Cat, Banana, Color, Square } from 'lucide-react';
+import { Mic, Volume2, Cat, Banana, Palette, Square, Circle, Triangle, Hexagon } from 'lucide-react';
+
 import CharacterCard from '@/components/CharacterCard';
 import { Button } from '@/components/ui/button';
 import startSpeechRecognition from '@/services/speechRecognition';
@@ -29,7 +29,7 @@ const animalAlphabet = [
   { char: 'S', example: 'Singa', color: 'bg-kid-purple' },
   { char: 'T', example: 'Tupai', color: 'bg-kid-lightBlue' },
   { char: 'U', example: 'Ular', color: 'bg-kid-teal' },
-  { char: 'V', example: 'Vampir' /* kelelawar vampir */, color: 'bg-kid-lime' },
+  { char: 'V', example: 'Vampir', color: 'bg-kid-lime' },
   { char: 'W', example: 'Walet', color: 'bg-kid-pink' },
   { char: 'Z', example: 'Zebra', color: 'bg-kid-green' },
 ];
@@ -73,13 +73,10 @@ const shapesData = [
   { icon: Hexagon, name: 'Segi Enam', color: 'bg-kid-purple' },
 ];
 
-// Import icon bentuk
-import { Circle, Square, Triangle, Hexagon } from 'lucide-react';
-
 const categories = [
   { key: 'animal', label: 'Nama Hewan', icon: Cat },
   { key: 'fruit', label: 'Nama Buah', icon: Banana },
-  { key: 'color', label: 'Warna', icon: Color },
+  { key: 'color', label: 'Warna', icon: Palette },
   { key: 'shape', label: 'Bentuk', icon: Square },
 ] as const;
 type CategoryKey = typeof categories[number]['key'];
@@ -383,4 +380,3 @@ const Alphabet: React.FC = () => {
 };
 
 export default Alphabet;
-
