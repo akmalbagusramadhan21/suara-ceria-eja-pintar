@@ -36,6 +36,10 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
             src={imageSrc} 
             alt={example || character} 
             className="object-contain max-h-full max-w-full rounded-lg"
+            onError={(e) => {
+              console.error(`Error loading image: ${imageSrc}`);
+              e.currentTarget.src = "https://placehold.co/200?text=" + encodeURIComponent(example || character) + "&fontsize=24";
+            }}
           />
         </motion.div>
       )}
