@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
@@ -108,15 +107,15 @@ const Alphabet: React.FC = () => {
 
   // Function to get image URL or fallback to placeholder
   const getImageUrl = (item: any) => {
-    // Check if image path exists
+    // Check if image path exists and add a query parameter to prevent caching if needed
     if (!item?.image) {
-      // Generate a colored placeholder based on the character or name
+      // Generate a text placeholder based on the character or name
       const seed = item.char || item.name || 'default';
-      return `${placeholderImageBase}?text=${encodeURIComponent(seed)}`;
+      return `https://placehold.co/200?text=${encodeURIComponent(seed)}&fontsize=24`;
     }
-
-    // Return the image path, browser will handle the case if image doesn't exist
-    return item.image;
+    
+    // Add timestamp to prevent caching issues with images
+    return `${item.image}?t=${new Date().getTime()}`;
   };
 
   // Preload images for the current category
@@ -263,7 +262,7 @@ const Alphabet: React.FC = () => {
 
         {category !== 'color' && category !== 'shape' && streak > 0 && (
           <div className="bg-kid-yellow/20 rounded-full px-4 py-1 text-kid-orange font-medium inline-block">
-            🔥 Streak: {streak}
+            �� Streak: {streak}
           </div>
         )}
       </div>
@@ -298,35 +297,12 @@ const Alphabet: React.FC = () => {
       {category === 'color' && (
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           {colorsData.map((item) => (
-            <motion.div
-              key={item.name}
-              className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color} relative overflow-hidden`}
-              title={item.name}
-              role="button"
-              tabIndex={0}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const utter = new SpeechSynthesisUtterance(item.name);
-                utter.lang = 'id-ID';
-                speechSynthesis.speak(utter);
-              }}
-            >
-              <span className="text-2xl text-white font-bold z-10">{item.name}</span>
+            <div key={item.name} className="flex flex-col items-center">
+              {/* Image above the color card */}
               <motion.div 
-                className="absolute inset-0 flex items-center justify-center opacity-30 p-2"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ 
-                  opacity: 0.6, 
-                  scale: [0.9, 1.05, 0.9],
-                  transition: { 
-                    scale: { 
-                      repeat: Infinity, 
-                      duration: 3,
-                      ease: "easeInOut" 
-                    }
-                  }
-                }}
+                className="mb-2 w-20 h-20 flex items-center justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
               >
                 <img 
                   src={getImageUrl(item)} 
@@ -334,20 +310,10 @@ const Alphabet: React.FC = () => {
                   className="object-contain max-h-full max-w-full rounded-lg"
                 />
               </motion.div>
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      {/* Kartu bentuk */}
-      {category === 'shape' && (
-        <div className="flex flex-wrap justify-center gap-6 mb-8">
-          {shapesData.map((item) => {
-            const ShapeIcon = item.icon;
-            return (
+              
+              {/* Color card */}
               <motion.div
-                key={item.name}
-                className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color} relative overflow-hidden`}
+                className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color}`}
                 title={item.name}
                 role="button"
                 tabIndex={0}
@@ -359,22 +325,25 @@ const Alphabet: React.FC = () => {
                   speechSynthesis.speak(utter);
                 }}
               >
-                <ShapeIcon className="text-white mb-4 z-10" size={48} />
-                <span className="text-2xl text-white font-bold z-10">{item.name}</span>
+                <span className="text-2xl text-white font-bold">{item.name}</span>
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Kartu bentuk */}
+      {category === 'shape' && (
+        <div className="flex flex-wrap justify-center gap-6 mb-8">
+          {shapesData.map((item) => {
+            const ShapeIcon = item.icon;
+            return (
+              <div key={item.name} className="flex flex-col items-center">
+                {/* Image above the shape card */}
                 <motion.div 
-                  className="absolute inset-0 flex items-center justify-center opacity-30 p-2"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: 0.3, 
-                    rotate: 360,
-                    transition: { 
-                      rotate: { 
-                        repeat: Infinity, 
-                        duration: 8,
-                        ease: "linear" 
-                      }
-                    }
-                  }}
+                  className="mb-2 w-20 h-20 flex items-center justify-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                 >
                   <img 
                     src={getImageUrl(item)} 
@@ -382,7 +351,25 @@ const Alphabet: React.FC = () => {
                     className="object-contain max-h-full max-w-full rounded-lg"
                   />
                 </motion.div>
-              </motion.div>
+                
+                {/* Shape card */}
+                <motion.div
+                  className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color}`}
+                  title={item.name}
+                  role="button"
+                  tabIndex={0}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const utter = new SpeechSynthesisUtterance(item.name);
+                    utter.lang = 'id-ID';
+                    speechSynthesis.speak(utter);
+                  }}
+                >
+                  <ShapeIcon className="text-white mb-4" size={48} />
+                  <span className="text-2xl text-white font-bold">{item.name}</span>
+                </motion.div>
+              </div>
             );
           })}
         </div>

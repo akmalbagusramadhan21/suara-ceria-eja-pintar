@@ -21,34 +21,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   imageSrc,
 }) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={cn(
-        "flex flex-col items-center p-6 rounded-2xl shadow-md cursor-pointer transition-all relative overflow-hidden",
-        color,
-        isActive ? "ring-4 ring-white ring-offset-4 ring-offset-background" : ""
-      )}
-      onClick={onClick}
-    >
-      <span className="text-7xl font-bold text-white mb-2 z-10">{character}</span>
-      {example && (
-        <span className="text-xl text-white/80 font-medium z-10">{example}</span>
-      )}
+    <div className="flex flex-col items-center">
+      {/* Image rendered above the card */}
       {imageSrc && (
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center opacity-30 p-2"
-          initial={{ opacity: 0, scale: 0.8 }}
+          className="mb-2 w-20 h-20 flex items-center justify-center"
+          initial={{ opacity: 0, y: 10 }}
           animate={{ 
-            opacity: 0.3, 
-            scale: [0.9, 1.05, 0.9],
-            transition: { 
-              scale: { 
-                repeat: Infinity, 
-                duration: 3,
-                ease: "easeInOut" 
-              }
-            }
+            opacity: 1, 
+            y: 0
           }}
         >
           <img 
@@ -58,7 +39,24 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           />
         </motion.div>
       )}
-    </motion.div>
+
+      {/* Character card */}
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className={cn(
+          "flex flex-col items-center p-6 rounded-2xl shadow-md cursor-pointer transition-all",
+          color,
+          isActive ? "ring-4 ring-white ring-offset-4 ring-offset-background" : ""
+        )}
+        onClick={onClick}
+      >
+        <span className="text-7xl font-bold text-white mb-2">{character}</span>
+        {example && (
+          <span className="text-xl text-white/80 font-medium">{example}</span>
+        )}
+      </motion.div>
+    </div>
   );
 };
 
