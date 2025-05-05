@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
@@ -9,68 +10,68 @@ import startSpeechRecognition from '@/services/speechRecognition';
 
 // Data kategori (hewani)
 const animalAlphabet = [
-  { char: 'A', example: 'Ayam', color: 'bg-kid-red' },
-  { char: 'B', example: 'Bebek', color: 'bg-kid-blue' },
-  { char: 'C', example: 'Cicak', color: 'bg-kid-green' },
-  { char: 'D', example: 'Domba', color: 'bg-kid-purple' },
-  { char: 'E', example: 'Elang', color: 'bg-kid-orange' },
-  { char: 'G', example: 'Gajah', color: 'bg-kid-pink' },
-  { char: 'H', example: 'Harimau', color: 'bg-kid-lightBlue' },
-  { char: 'I', example: 'Ikan', color: 'bg-kid-red' },
-  { char: 'J', example: 'Jerapah', color: 'bg-kid-lime' },
-  { char: 'K', example: 'Kucing', color: 'bg-kid-purple' },
-  { char: 'L', example: 'Lebah', color: 'bg-kid-orange' },
-  { char: 'M', example: 'Monyet', color: 'bg-kid-teal' },
-  { char: 'N', example: 'Nyamuk', color: 'bg-kid-pink' },
-  { char: 'O', example: 'Onta', color: 'bg-kid-blue' },
-  { char: 'P', example: 'Paus', color: 'bg-kid-red' },
-  { char: 'Q', example: 'Quokka', color: 'bg-kid-green' },
-  { char: 'R', example: 'Rusa', color: 'bg-kid-orange' },
-  { char: 'S', example: 'Singa', color: 'bg-kid-purple' },
-  { char: 'T', example: 'Tupai', color: 'bg-kid-lightBlue' },
-  { char: 'U', example: 'Ular', color: 'bg-kid-teal' },
-  { char: 'V', example: 'Vampir', color: 'bg-kid-lime' },
-  { char: 'W', example: 'Walet', color: 'bg-kid-pink' },
-  { char: 'Z', example: 'Zebra', color: 'bg-kid-green' },
+  { char: 'A', example: 'Ayam', color: 'bg-kid-red', image: '/images/animals/ayam.png' },
+  { char: 'B', example: 'Bebek', color: 'bg-kid-blue', image: '/images/animals/bebek.png' },
+  { char: 'C', example: 'Cicak', color: 'bg-kid-green', image: '/images/animals/cicak.png' },
+  { char: 'D', example: 'Domba', color: 'bg-kid-purple', image: '/images/animals/domba.png' },
+  { char: 'E', example: 'Elang', color: 'bg-kid-orange', image: '/images/animals/elang.png' },
+  { char: 'G', example: 'Gajah', color: 'bg-kid-pink', image: '/images/animals/gajah.png' },
+  { char: 'H', example: 'Harimau', color: 'bg-kid-lightBlue', image: '/images/animals/harimau.png' },
+  { char: 'I', example: 'Ikan', color: 'bg-kid-red', image: '/images/animals/ikan.png' },
+  { char: 'J', example: 'Jerapah', color: 'bg-kid-lime', image: '/images/animals/jerapah.png' },
+  { char: 'K', example: 'Kucing', color: 'bg-kid-purple', image: '/images/animals/kucing.png' },
+  { char: 'L', example: 'Lebah', color: 'bg-kid-orange', image: '/images/animals/lebah.png' },
+  { char: 'M', example: 'Monyet', color: 'bg-kid-teal', image: '/images/animals/monyet.png' },
+  { char: 'N', example: 'Nyamuk', color: 'bg-kid-pink', image: '/images/animals/nyamuk.png' },
+  { char: 'O', example: 'Onta', color: 'bg-kid-blue', image: '/images/animals/onta.png' },
+  { char: 'P', example: 'Paus', color: 'bg-kid-red', image: '/images/animals/paus.png' },
+  { char: 'Q', example: 'Quokka', color: 'bg-kid-green', image: '/images/animals/quokka.png' },
+  { char: 'R', example: 'Rusa', color: 'bg-kid-orange', image: '/images/animals/rusa.png' },
+  { char: 'S', example: 'Singa', color: 'bg-kid-purple', image: '/images/animals/singa.png' },
+  { char: 'T', example: 'Tupai', color: 'bg-kid-lightBlue', image: '/images/animals/tupai.png' },
+  { char: 'U', example: 'Ular', color: 'bg-kid-teal', image: '/images/animals/ular.png' },
+  { char: 'V', example: 'Vampir', color: 'bg-kid-lime', image: '/images/animals/vampir.png' },
+  { char: 'W', example: 'Walet', color: 'bg-kid-pink', image: '/images/animals/walet.png' },
+  { char: 'Z', example: 'Zebra', color: 'bg-kid-green', image: '/images/animals/zebra.png' },
 ];
 
 // Data kategori buah
 const fruitAlphabet = [
-  { char: 'A', example: 'Apel', color: 'bg-kid-red' },
-  { char: 'B', example: 'Belimbing', color: 'bg-kid-yellow' },
-  { char: 'C', example: 'Ceri', color: 'bg-kid-pink' },
-  { char: 'D', example: 'Durian', color: 'bg-kid-green' },
-  { char: 'J', example: 'Jeruk', color: 'bg-kid-orange' },
-  { char: 'M', example: 'Mangga', color: 'bg-kid-yellow' },
-  { char: 'N', example: 'Nangka', color: 'bg-kid-lime' },
-  { char: 'P', example: 'Pisang', color: 'bg-kid-yellow' },
-  { char: 'R', example: 'Rambutan', color: 'bg-kid-red' },
-  { char: 'S', example: 'Salak', color: 'bg-kid-brown' },
-  { char: 'T', example: 'Timun', color: 'bg-kid-green' },
-  { char: 'W', example: 'Wortel', color: 'bg-kid-orange' },
-  { char: 'Z', example: 'Zaitun', color: 'bg-kid-green' },
+  { char: 'A', example: 'Apel', color: 'bg-kid-red', image: '/images/fruits/apel.png' },
+  { char: 'B', example: 'Belimbing', color: 'bg-kid-yellow', image: '/images/fruits/belimbing.png' },
+  { char: 'C', example: 'Ceri', color: 'bg-kid-pink', image: '/images/fruits/ceri.png' },
+  { char: 'D', example: 'Durian', color: 'bg-kid-green', image: '/images/fruits/durian.png' },
+  { char: 'J', example: 'Jeruk', color: 'bg-kid-orange', image: '/images/fruits/jeruk.png' },
+  { char: 'M', example: 'Mangga', color: 'bg-kid-yellow', image: '/images/fruits/mangga.png' },
+  { char: 'N', example: 'Nangka', color: 'bg-kid-lime', image: '/images/fruits/nangka.png' },
+  { char: 'P', example: 'Pisang', color: 'bg-kid-yellow', image: '/images/fruits/pisang.png' },
+  { char: 'R', example: 'Rambutan', color: 'bg-kid-red', image: '/images/fruits/rambutan.png' },
+  { char: 'S', example: 'Salak', color: 'bg-kid-brown', image: '/images/fruits/salak.png' },
+  { char: 'T', example: 'Timun', color: 'bg-kid-green', image: '/images/fruits/timun.png' },
+  { char: 'W', example: 'Wortel', color: 'bg-kid-orange', image: '/images/fruits/wortel.png' },
+  { char: 'Z', example: 'Zaitun', color: 'bg-kid-green', image: '/images/fruits/zaitun.png' },
 ];
 
 // Data warna
 const colorsData = [
-  { color: 'bg-kid-blue', name: 'Biru' },
-  { color: 'bg-kid-red', name: 'Merah' },
-  { color: 'bg-kid-yellow', name: 'Kuning' },
-  { color: 'bg-kid-green', name: 'Hijau' },
-  { color: 'bg-kid-purple', name: 'Ungu' },
-  { color: 'bg-kid-orange', name: 'Oranye' },
-  { color: 'bg-kid-teal', name: 'Toska' },
-  { color: 'bg-kid-pink', name: 'Merah Muda' },
-  { color: 'bg-kid-lightBlue', name: 'Biru Muda' },
-  { color: 'bg-kid-lime', name: 'Lime' },
+  { color: 'bg-kid-blue', name: 'Biru', image: '/images/colors/blue.png' },
+  { color: 'bg-kid-red', name: 'Merah', image: '/images/colors/red.png' },
+  { color: 'bg-kid-yellow', name: 'Kuning', image: '/images/colors/yellow.png' },
+  { color: 'bg-kid-green', name: 'Hijau', image: '/images/colors/green.png' },
+  { color: 'bg-kid-purple', name: 'Ungu', image: '/images/colors/purple.png' },
+  { color: 'bg-kid-orange', name: 'Oranye', image: '/images/colors/orange.png' },
+  { color: 'bg-kid-teal', name: 'Toska', image: '/images/colors/teal.png' },
+  { color: 'bg-kid-pink', name: 'Merah Muda', image: '/images/colors/pink.png' },
+  { color: 'bg-kid-lightBlue', name: 'Biru Muda', image: '/images/colors/lightblue.png' },
+  { color: 'bg-kid-lime', name: 'Lime', image: '/images/colors/lime.png' },
 ];
 
 // Data bentuk
 const shapesData = [
-  { icon: Square, name: 'Persegi', color: 'bg-kid-blue' },
-  { icon: Circle, name: 'Lingkaran', color: 'bg-kid-green' },
-  { icon: Triangle, name: 'Segitiga', color: 'bg-kid-yellow' },
-  { icon: Hexagon, name: 'Segi Enam', color: 'bg-kid-purple' },
+  { icon: Square, name: 'Persegi', color: 'bg-kid-blue', image: '/images/shapes/square.png' },
+  { icon: Circle, name: 'Lingkaran', color: 'bg-kid-green', image: '/images/shapes/circle.png' },
+  { icon: Triangle, name: 'Segitiga', color: 'bg-kid-yellow', image: '/images/shapes/triangle.png' },
+  { icon: Hexagon, name: 'Segi Enam', color: 'bg-kid-purple', image: '/images/shapes/hexagon.png' },
 ];
 
 const categories = [
@@ -81,12 +82,16 @@ const categories = [
 ] as const;
 type CategoryKey = typeof categories[number]['key'];
 
+// For the time being, we'll use placeholder images until real images are supplied
+const placeholderImageBase = "https://placehold.co/200";
+
 const Alphabet: React.FC = () => {
   const [category, setCategory] = useState<CategoryKey>('animal');
   const [selectedCharIndex, setSelectedCharIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [feedback, setFeedback] = useState<'success' | 'error' | null>(null);
   const [streak, setStreak] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState<Record<string, boolean>>({});
 
   // Pilih data berdasarkan kategori
   const data =
@@ -100,6 +105,37 @@ const Alphabet: React.FC = () => {
     category === 'animal' || category === 'fruit'
       ? data[selectedCharIndex] || data[0]
       : undefined;
+
+  // Function to get image URL or fallback to placeholder
+  const getImageUrl = (item: any) => {
+    // Check if image path exists
+    if (!item?.image) {
+      // Generate a colored placeholder based on the character or name
+      const seed = item.char || item.name || 'default';
+      return `${placeholderImageBase}?text=${encodeURIComponent(seed)}`;
+    }
+
+    // Return the image path, browser will handle the case if image doesn't exist
+    return item.image;
+  };
+
+  // Preload images for the current category
+  useEffect(() => {
+    let currentData: any[] = [];
+    
+    if (category === 'animal') currentData = animalAlphabet;
+    else if (category === 'fruit') currentData = fruitAlphabet;
+    else if (category === 'color') currentData = colorsData;
+    else if (category === 'shape') currentData = shapesData;
+    
+    currentData.forEach(item => {
+      const img = new Image();
+      img.src = getImageUrl(item);
+      img.onload = () => {
+        setIsImageLoaded(prev => ({...prev, [img.src]: true}));
+      };
+    });
+  }, [category]);
 
   useEffect(() => {
     // reset indeks
@@ -252,6 +288,7 @@ const Alphabet: React.FC = () => {
               example={selectedChar.example}
               color={selectedChar.color}
               isActive={isListening}
+              imageSrc={getImageUrl(selectedChar)}
             />
           </motion.div>
         </div>
@@ -261,20 +298,43 @@ const Alphabet: React.FC = () => {
       {category === 'color' && (
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           {colorsData.map((item) => (
-            <div
+            <motion.div
               key={item.name}
-              className={`w-36 h-36 rounded-2xl shadow-md flex items-center justify-center cursor-pointer ${item.color}`}
+              className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color} relative overflow-hidden`}
               title={item.name}
               role="button"
               tabIndex={0}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 const utter = new SpeechSynthesisUtterance(item.name);
                 utter.lang = 'id-ID';
                 speechSynthesis.speak(utter);
               }}
             >
-              <span className="text-2xl text-white font-bold">{item.name}</span>
-            </div>
+              <span className="text-2xl text-white font-bold z-10">{item.name}</span>
+              <motion.div 
+                className="absolute inset-0 flex items-center justify-center opacity-30 p-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ 
+                  opacity: 0.6, 
+                  scale: [0.9, 1.05, 0.9],
+                  transition: { 
+                    scale: { 
+                      repeat: Infinity, 
+                      duration: 3,
+                      ease: "easeInOut" 
+                    }
+                  }
+                }}
+              >
+                <img 
+                  src={getImageUrl(item)} 
+                  alt={item.name} 
+                  className="object-contain max-h-full max-w-full rounded-lg"
+                />
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       )}
@@ -285,23 +345,44 @@ const Alphabet: React.FC = () => {
           {shapesData.map((item) => {
             const ShapeIcon = item.icon;
             return (
-              <div
+              <motion.div
                 key={item.name}
-                className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color}`}
+                className={`w-36 h-36 rounded-2xl shadow-md flex flex-col items-center justify-center cursor-pointer ${item.color} relative overflow-hidden`}
                 title={item.name}
                 role="button"
                 tabIndex={0}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   const utter = new SpeechSynthesisUtterance(item.name);
                   utter.lang = 'id-ID';
                   speechSynthesis.speak(utter);
                 }}
               >
-                <ShapeIcon className="text-white mb-4" size={48} />
-                <span className="text-2xl text-white font-bold">
-                  {item.name}
-                </span>
-              </div>
+                <ShapeIcon className="text-white mb-4 z-10" size={48} />
+                <span className="text-2xl text-white font-bold z-10">{item.name}</span>
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center opacity-30 p-2"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: 0.3, 
+                    rotate: 360,
+                    transition: { 
+                      rotate: { 
+                        repeat: Infinity, 
+                        duration: 8,
+                        ease: "linear" 
+                      }
+                    }
+                  }}
+                >
+                  <img 
+                    src={getImageUrl(item)} 
+                    alt={item.name} 
+                    className="object-contain max-h-full max-w-full rounded-lg"
+                  />
+                </motion.div>
+              </motion.div>
             );
           })}
         </div>
@@ -370,6 +451,7 @@ const Alphabet: React.FC = () => {
                 color={item.color}
                 example={item.example}
                 isActive={index === selectedCharIndex}
+                imageSrc={getImageUrl(item)}
               />
             </div>
           ))}
